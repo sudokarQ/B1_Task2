@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:B1_Task2"
         mc:Ignorable="d"
-        Title="MainWindow" Width="1200" Height="800"  ResizeMode="NoResize">
+        Title="MainWindow" Width="1200" Height="800" ResizeMode="NoResize">
     <Grid Width="1200" Height="800">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -15,12 +15,21 @@
         </Grid.RowDefinitions>
 
         <Button Content="Load Excel Data" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" Click="LoadExcelButton_Click"/>
-        <Button Content="Load table data" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,40,0,0" Click="LoadTables_Click"/>
+        <!--<Button Content="Load table data" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,40,0,0" Click="LoadTables_Click"/>-->
 
-        <DataGrid x:Name="dataGridTotals" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0"
-                  AutoGenerateColumns="True" MinWidth="680" MinHeight="226" Width="1064" Height="255" Grid.RowSpan="3"/>
+        <ListView x:Name="fileListView" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="500" Margin="5,77,0,0"
+                  SelectionChanged="FileListView_SelectionChanged" Grid.RowSpan="3">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="File Name" Width="150" DisplayMemberBinding="{Binding}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
 
-        <DataGrid x:Name="dataGrid" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="126,247,0,0"
-                  AutoGenerateColumns="True" MinWidth="680" MinHeight="271" Width="1064" Height="445"/>
+        <DataGrid x:Name="dataGridTotals" Grid.Row="0" VerticalAlignment="Top" Margin="210,20,12,0"
+                  AutoGenerateColumns="True" MinWidth="680" MinHeight="226" Width="978" Height="255"/>
+
+        <DataGrid x:Name="dataGrid" VerticalAlignment="Top" Margin="210,323,12,0"
+                  AutoGenerateColumns="True" MinWidth="680" MinHeight="271" Width="978" Height="445" Grid.RowSpan="3"/>
     </Grid>
 </Window>
