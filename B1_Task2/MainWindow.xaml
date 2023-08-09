@@ -5,12 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:B1_Task2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
-    <Grid>
+        Title="MainWindow" Width="1200" Height="800"  ResizeMode="NoResize">
+    <Grid Width="1200" Height="800">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
         <Button Content="Load Excel Data" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" Click="LoadExcelButton_Click"/>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Width="680" Height="271" Margin="0,292,10,0"
-                  AutoGenerateColumns="True"/>
-        <DataGrid x:Name="dataGridTotals" HorizontalAlignment="Right" VerticalAlignment="Top" Width="680" Height="226" Margin="0,10,10,0"
-                  AutoGenerateColumns="True"/>
+        <Button Content="Load table data" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,40,0,0" Click="LoadTables_Click"/>
+
+        <DataGrid x:Name="dataGridTotals" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0"
+                  AutoGenerateColumns="True" MinWidth="680" MinHeight="226" Width="1064" Height="255" Grid.RowSpan="3"/>
+
+        <DataGrid x:Name="dataGrid" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="126,247,0,0"
+                  AutoGenerateColumns="True" MinWidth="680" MinHeight="271" Width="1064" Height="445"/>
     </Grid>
 </Window>

@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 
 namespace B1_Task2
@@ -55,5 +53,10 @@ namespace B1_Task2
             dataGridTotals.ItemsSource = groupedEntries.ToList();
         }
 
+        private void LoadTables_Click(object sender, RoutedEventArgs e)
+        {
+            LoadDataEntries();
+            CalculateAndDisplayTotals();
+        }
     }
 }
