@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 
 using B1_Task2.Model;
 
@@ -11,8 +12,9 @@ namespace B1_Task2
 {
     public class ExcelDataLoader
     {
-        public async void LoadDataFromExcelAsync(string filePath)
+        public async Task<int> LoadDataFromExcelAsync(string filePath)
         {
+            var id = 0;
             using (var package = new ExcelPackage(new FileInfo(filePath)))
             {
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -50,6 +52,8 @@ namespace B1_Task2
 
                 file = await context.Files.FirstOrDefaultAsync(x => x == file);
 
+                id = file.Id;
+
                 for (int row = 10; row <= worksheet.Dimension.End.Row; row++)
                 {
                     if (worksheet.Cells[row, 1].Value is null || worksheet.Cells[row, 1].Value.ToString().Length != 4)
@@ -82,6 +86,8 @@ namespace B1_Task2
 
                 await context.SaveChangesAsync();
             }
+
+            return id;
         }
     }
 }
