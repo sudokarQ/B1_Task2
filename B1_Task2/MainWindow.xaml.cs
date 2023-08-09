@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 
@@ -35,7 +34,7 @@ namespace B1_Task2
 
         private void LoadedFiles_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            fileListView.ItemsSource = context.Files.Select(x => x.Id).ToList(); ; // Подключаем обновленный источник данных
+            fileListView.ItemsSource = context.Files.Select(x => x.Id).ToList();
         }
 
         private void FileListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -69,9 +68,25 @@ namespace B1_Task2
                     EndingDebitTotal = group.Sum(entry => entry.EndingDebitBalance),
                     EndingCreditTotal = group.Sum(entry => entry.EndingCreditBalance)
                 })
-                .OrderBy(group => group.Class);
+                .ToList();
 
-            dataGridTotals.ItemsSource = groupedEntries.ToList();
+            var overallTotals = new
+            {
+                Class = "Общий итог",
+                BeginningDebitTotal = groupedEntries.Sum(group => group.BeginningDebitTotal),
+                BeginningCreditTotal = groupedEntries.Sum(group => group.BeginningCreditTotal),
+                DebitTurnoverTotal = groupedEntries.Sum(group => group.DebitTurnoverTotal),
+                CreditTurnoverTotal = groupedEntries.Sum(group => group.CreditTurnoverTotal),
+                EndingDebitTotal = groupedEntries.Sum(group => group.EndingDebitTotal),
+                EndingCreditTotal = groupedEntries.Sum(group => group.EndingCreditTotal)
+            };
+
+            groupedEntries.Add(overallTotals);
+
+            groupedEntries = groupedEntries.OrderBy(group => group.Class).ToList();
+
+            dataGridTotals.ItemsSource = groupedEntries;
         }
+
     }
 }
